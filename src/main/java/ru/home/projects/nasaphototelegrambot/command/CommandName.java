@@ -3,7 +3,9 @@ package ru.home.projects.nasaphototelegrambot.command;
 public enum CommandName {
 
     START("/start"),
-    STOP("/stop");
+    STOP("/stop"),
+    HELP("/help"),
+    NO("nocommand");
 
     private final String commandName;
 
