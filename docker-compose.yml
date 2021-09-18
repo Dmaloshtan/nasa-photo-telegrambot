@@ -4,7 +4,6 @@ services:
   nptb:
     build:
       context: .
-    environment:
-      - BOT_NAME=${BOT_NAME}
-      - BOT_TOKEN=${BOT_TOKEN}
+    env_file:
+     - .env
     restart: always
