@@ -1,5 +1,6 @@
 package ru.home.projects.nasaphototelegrambot.bot;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -9,6 +10,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.home.projects.nasaphototelegrambot.command.CommandContainer;
 import ru.home.projects.nasaphototelegrambot.command.CommandName;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageServiceImpl;
+import ru.home.projects.nasaphototelegrambot.service.TelegramUserService;
 
 @Component
 public class NasaPhotoTelegramBot extends TelegramLongPollingBot {
@@ -32,8 +34,9 @@ public class NasaPhotoTelegramBot extends TelegramLongPollingBot {
 
     private final CommandContainer commandContainer;
 
-    public NasaPhotoTelegramBot() {
-        commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this));
+    @Autowired
+    public NasaPhotoTelegramBot(TelegramUserService telegramUserService) {
+        commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this), telegramUserService);
     }
 
     @Override
