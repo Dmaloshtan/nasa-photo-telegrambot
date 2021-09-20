@@ -2,8 +2,19 @@ version: '3.1'
 
 services:
   nptb:
+    depends_on:
+      - nptb-db
     build:
       context: .
     env_file:
-     - .env
+     - C:\Users\Дмитрий\IdeaProjects\nasa-photo-telegrambot\nasatb.env
     restart: always
+    nptb-db:
+      image: mysql:5.7
+      restart: always
+      env_file:
+        - C:\Users\Дмитрий\IdeaProjects\nasa-photo-telegrambot\nasatb.env
+      ports:
+        - '3307:3306'
+      expose:
+        - '3307'

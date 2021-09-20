@@ -9,11 +9,13 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.home.projects.nasaphototelegrambot.bot.NasaPhotoTelegramBot;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageServiceImpl;
+import ru.home.projects.nasaphototelegrambot.service.TelegramUserService;
 
 public abstract class AbstractCommandTest {
 
     protected NasaPhotoTelegramBot telegramBot = Mockito.mock(NasaPhotoTelegramBot.class);
     protected SendBotMessageService messageService = new SendBotMessageServiceImpl(telegramBot);
+    protected TelegramUserService telegramUserService = Mockito.mock(TelegramUserService.class);
 
     abstract String getCommandName();
     abstract String getCommandMessage();
