@@ -10,13 +10,6 @@ class NasaClientTest {
 
     @Test
     public void apiTest(){
-        NasaClient nasaClient = new NasaClient();
-//        nasaClient.setUrl("https://api.nasa.gov/planetary/apod?api_key=J8EKpXXYwrW1t3KMJaKPn0ON9k9AqgO0BiX8ue0g");
-
-//        AstronomyPictureOfTheDay pictureOfTheDay = nasaClient.getAstronomyPictureOfTheDay();
-
-
-        System.out.println(nasaClient.getAPI_KEY());
 
     }
 
