@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import ru.home.projects.nasaphototelegrambot.nasaClient.NasaClient;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageServiceImpl;
 import ru.home.projects.nasaphototelegrambot.service.TelegramUserService;
@@ -22,7 +23,8 @@ class CommandContainerTest {
     public void init(){
         SendBotMessageService messageService = Mockito.mock(SendBotMessageService.class);
         TelegramUserService telegramUserService = Mockito.mock(TelegramUserService.class);
-        commandContainer = new CommandContainer(messageService, telegramUserService);
+        NasaClient nasaClient = Mockito.mock(NasaClient.class);
+        commandContainer = new CommandContainer(messageService, telegramUserService, nasaClient);
     }
 
     @Test

@@ -9,6 +9,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.home.projects.nasaphototelegrambot.command.CommandContainer;
 import ru.home.projects.nasaphototelegrambot.command.CommandName;
+import ru.home.projects.nasaphototelegrambot.nasaClient.NasaClient;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageServiceImpl;
 import ru.home.projects.nasaphototelegrambot.service.TelegramUserService;
 
@@ -35,8 +36,8 @@ public class NasaPhotoTelegramBot extends TelegramLongPollingBot {
     private final CommandContainer commandContainer;
 
     @Autowired
-    public NasaPhotoTelegramBot(TelegramUserService telegramUserService) {
-        commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this), telegramUserService);
+    public NasaPhotoTelegramBot(TelegramUserService telegramUserService, NasaClient nasaClient) {
+        commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this), telegramUserService, nasaClient);
     }
 
     @Override
