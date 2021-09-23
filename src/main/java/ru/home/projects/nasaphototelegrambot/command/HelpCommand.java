@@ -16,9 +16,10 @@ public class HelpCommand implements Command {
     public final static String HELP_MESSAGE = String.format("✨<b>Доступные команды</b>✨\n\n"
                     + "<b>Начать\\закончить работу с ботом</b>\n"
                     + "%s - начать работу со мной\n"
-                    + "%s - приостановить работу со мной\n\n"
-                    + "%s - получить помощь в работе со мной\n",
-            CommandName.START.getCommandName(), CommandName.STOP.getCommandName(), CommandName.HELP.getCommandName());
+                    + "%s - приостановить работу со мной\n"
+                    + "%s - получить помощь в работе со мной\n"
+                    + "%s - Получить фото дня\n",
+            CommandName.START.getCommandName(), CommandName.STOP.getCommandName(), CommandName.HELP.getCommandName(), CommandName.APOD.getCommandName());
 
     @Override
     public void execute(Update update) {

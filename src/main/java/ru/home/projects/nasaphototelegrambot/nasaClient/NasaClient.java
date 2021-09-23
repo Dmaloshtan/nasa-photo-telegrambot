@@ -21,17 +21,12 @@ public class NasaClient {
 
     public AstronomyPictureOfTheDay getAstronomyPictureOfTheDay(){
         String url = getUrl() + getAPI_KEY();
-        System.out.println(url);
         RestTemplate template = new RestTemplate();
 
         AstronomyPictureOfTheDay astronomyPictureOfTheDay = template.getForObject(url,AstronomyPictureOfTheDay.class);
 
         return astronomyPictureOfTheDay;
     }
-
-//    public List<String> getApiUrlEndpoints(AstronomyPictureOfTheDayDto astronomyPictureOfTheDayDto){
-//
-//    }
 
 
     public String getUrl() {
