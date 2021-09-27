@@ -6,15 +6,14 @@ import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
 
 public class NoCommand implements Command{
 
-    @Autowired
     private final SendBotMessageService messageService;
 
     public NoCommand(SendBotMessageService messageService) {
         this.messageService = messageService;
     }
 
-    public final static String NO_MESSAGE = "Я поддерживаю команды, начинающиеся со слеша(/).\\n\"\n" +
-            "           + \"Чтобы посмотреть список команд введите /help";
+    public final static String NO_MESSAGE = "Я поддерживаю команды, начинающиеся со слеша(/)." +
+            "Чтобы посмотреть список команд введите /help";
 
     @Override
     public void execute(Update update) {

@@ -8,7 +8,7 @@ import ru.home.projects.nasaphototelegrambot.service.TelegramUserService;
 
 public class StartCommand implements Command{
 
-    @Autowired
+
     private final SendBotMessageService messageService;
 
     private final TelegramUserService telegramUserService;

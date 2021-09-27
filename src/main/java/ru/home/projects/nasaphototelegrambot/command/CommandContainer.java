@@ -1,7 +1,7 @@
 package ru.home.projects.nasaphototelegrambot.command;
 
 import com.google.common.collect.ImmutableMap;
-import ru.home.projects.nasaphototelegrambot.nasaClient.NasaClient;
+import ru.home.projects.nasaphototelegrambot.nasaClient.NasaClientImpl;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
 import ru.home.projects.nasaphototelegrambot.service.TelegramUserService;
 
@@ -10,7 +10,7 @@ public class CommandContainer {
     private final ImmutableMap<String, Command> commandMap;
     private final UnknownCommand unknownCommand;
 
-    public CommandContainer(SendBotMessageService messageService, TelegramUserService userService, NasaClient nasaClient) {
+    public CommandContainer(SendBotMessageService messageService, TelegramUserService userService, NasaClientImpl nasaClient) {
         commandMap = ImmutableMap.<String, Command>builder().
                 put(CommandName.START.getCommandName(), new StartCommand(messageService, userService)).
                 put(CommandName.STOP.getCommandName(), new StopCommand(messageService, userService)).

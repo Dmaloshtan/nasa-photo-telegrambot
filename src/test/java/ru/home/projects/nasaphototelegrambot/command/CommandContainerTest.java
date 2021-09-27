@@ -5,14 +5,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import ru.home.projects.nasaphototelegrambot.nasaClient.NasaClient;
+import ru.home.projects.nasaphototelegrambot.nasaClient.NasaClientImpl;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
-import ru.home.projects.nasaphototelegrambot.service.SendBotMessageServiceImpl;
 import ru.home.projects.nasaphototelegrambot.service.TelegramUserService;
 
 import java.util.Arrays;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Unit-level testing for CommandContainer")
 class CommandContainerTest {
@@ -23,7 +20,7 @@ class CommandContainerTest {
     public void init(){
         SendBotMessageService messageService = Mockito.mock(SendBotMessageService.class);
         TelegramUserService telegramUserService = Mockito.mock(TelegramUserService.class);
-        NasaClient nasaClient = Mockito.mock(NasaClient.class);
+        NasaClientImpl nasaClient = Mockito.mock(NasaClientImpl.class);
         commandContainer = new CommandContainer(messageService, telegramUserService, nasaClient);
     }
 

@@ -6,7 +6,6 @@ import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
 
 public class HelpCommand implements Command {
 
-    @Autowired
     private final SendBotMessageService messageService;
 
     public HelpCommand(SendBotMessageService messageService) {
@@ -18,8 +17,10 @@ public class HelpCommand implements Command {
                     + "%s - начать работу со мной\n"
                     + "%s - приостановить работу со мной\n"
                     + "%s - получить помощь в работе со мной\n"
-                    + "%s - Получить фото дня\n",
-            CommandName.START.getCommandName(), CommandName.STOP.getCommandName(), CommandName.HELP.getCommandName(), CommandName.APOD.getCommandName());
+                    + "%s - Получить фото сегодняшнего дня\n"
+                    + "%s + Дата в формате \"YYYY-MM-DD\", например \"/apod 2020-11-25\"  - Получить фото дня на выбранную дату\n",
+            CommandName.START.getCommandName(), CommandName.STOP.getCommandName(), CommandName.HELP.getCommandName(),
+            CommandName.APOD.getCommandName(), CommandName.APOD.getCommandName());
 
     @Override
     public void execute(Update update) {

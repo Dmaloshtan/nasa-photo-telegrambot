@@ -6,14 +6,14 @@ import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
 
 public class UnknownCommand implements Command{
 
-    @Autowired
+
     private final SendBotMessageService messageService;
 
     public UnknownCommand(SendBotMessageService messageService) {
         this.messageService = messageService;
     }
 
-    public final static String UNKNOWN_MESSAGE = "Не понимаю вас \\uD83D\\uDE1F," +
+    public final static String UNKNOWN_MESSAGE = "Не понимаю вас," +
             " напишите /help чтобы узнать какие команды я поддерживаю";
 
     @Override

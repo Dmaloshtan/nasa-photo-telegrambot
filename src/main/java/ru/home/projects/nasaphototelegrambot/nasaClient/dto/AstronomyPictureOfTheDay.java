@@ -1,4 +1,4 @@
-package ru.home.projects.nasaphototelegrambot.repository.entity;
+package ru.home.projects.nasaphototelegrambot.nasaClient.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
