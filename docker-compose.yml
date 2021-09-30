@@ -7,14 +7,12 @@ services:
     build:
       context: .
     env_file:
-     - C:\Users\Дмитрий\IdeaProjects\nasa-photo-telegrambot\nasatb.env
+     - nasatb-db-prod.env
     restart: always
   nptb-db:
-    image: mysql:5.7
+    image: postgres
     restart: always
     env_file:
-      - C:\Users\Дмитрий\IdeaProjects\nasa-photo-telegrambot\nasatb-db-prod.env
+      - nasatb-db-prod.env
     ports:
-      - '3307:3306'
-    expose:
-      - '3307'
+      - '5433:5433'

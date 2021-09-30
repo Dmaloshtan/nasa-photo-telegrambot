@@ -10,9 +10,10 @@ import ru.home.projects.nasaphototelegrambot.bot.NasaPhotoTelegramBot;
 @Service
 public class SendBotMessageServiceImpl implements SendBotMessageService{
 
-    @Autowired
+
     private final NasaPhotoTelegramBot nasaBot;
 
+    @Autowired
     public SendBotMessageServiceImpl(NasaPhotoTelegramBot nasaBot) {
         this.nasaBot = nasaBot;
     }
