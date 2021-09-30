@@ -26,7 +26,7 @@ public class SendPhotoOfTheDayImpl implements SendPhotoOfTheDayService{
     @Override
     public void sendPhoto() {
         AstronomyPictureOfTheDay astronomyPictureOfTheDay = nasaClient.getAstronomyPictureOfTheDay();
-        String message = String.format("%s\n\n" +
+        String message = String.format("Рассылка фото дня\n %s\n\n" +
                 "%s\n%s\n", astronomyPictureOfTheDay.getTitle(), astronomyPictureOfTheDay.getExplanation(), astronomyPictureOfTheDay.getUrl());
         List<TelegramUser> users = userRepository.findAllByActiveTrue();
 

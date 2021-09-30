@@ -15,8 +15,9 @@ public class HelpCommand implements Command {
     public final static String HELP_MESSAGE = String.format("✨<b>Доступные команды</b>✨\n\n"
                     + "<b>Начать\\закончить работу с ботом</b>\n"
                     + "%s - начать работу со мной\n"
-                    + "%s - приостановить работу со мной\n"
-                    + "%s - получить помощь в работе со мной\n"
+                    + "%s - приостановить работу со мной\n\n"
+                    + "%s - получить помощь в работе со мной\n\n"
+                    + "<b>Получить фото</b>\n"
                     + "%s - Получить фото сегодняшнего дня\n"
                     + "%s + Дата в формате \"YYYY-MM-DD\", например \"/apod 2020-11-25\"  - Получить фото дня на выбранную дату\n",
             CommandName.START.getCommandName(), CommandName.STOP.getCommandName(), CommandName.HELP.getCommandName(),
