@@ -1,53 +1,47 @@
 package ru.home.projects.nasaphototelegrambot.command;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageReplyMarkup;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import ru.home.projects.nasaphototelegrambot.nasaClient.NasaClient;
 import ru.home.projects.nasaphototelegrambot.nasaClient.NasaClientImpl;
 import ru.home.projects.nasaphototelegrambot.nasaClient.dto.AstronomyPictureOfTheDay;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
 
-public class AstronomyPictureOfTheDayCommand implements Command{
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+public class AstronomyPictureOfTheDayCommand implements Command{
 
     private final SendBotMessageService messageService;
 
-    private final NasaClient nasaClient;
-
-    public AstronomyPictureOfTheDayCommand(SendBotMessageService messageService, NasaClientImpl nasaClient) {
+    public AstronomyPictureOfTheDayCommand(SendBotMessageService messageService) {
         this.messageService = messageService;
-        this.nasaClient = nasaClient;
     }
 
     @Override
     public void execute(Update update) {
-        String[] message = update.getMessage().getText().split(" ");
-        System.out.println(update.getMessage().getText());
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(
+                Arrays.asList(
+                        InlineKeyboardButton.builder()
+                        .text("Фото сегодняшнего дня")
+                        .callbackData("today")
+                        .build(),
+                        InlineKeyboardButton.builder()
+                                .text("Выбрать дату")
+                                .callbackData("DatePhoto")
+                                .build())
+                );
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        messageService.sendMessage(update.getMessage().getChatId().toString(), "Выберите дату, на которую хотите получить фото", inlineKeyboardMarkup);
 
-        String date;
-
-        if(message.length > 1){
-            date = message[1];
-            messageService.sendMessage(update.getMessage().getChatId().toString(), sendAstronomyPictureOfTheDifferentDay(date));
-        } else {
-            messageService.sendMessage(update.getMessage().getChatId().toString(), sendAstronomyPictureOfTheDay());
-        }
     }
 
-    private String sendAstronomyPictureOfTheDay(){
-        AstronomyPictureOfTheDay astronomyPictureOfTheDay = nasaClient.getAstronomyPictureOfTheDay();
-        String message = String.format("%s\n\n" +
-                "%s\n%s\n", astronomyPictureOfTheDay.getTitle(), astronomyPictureOfTheDay.getExplanation(), astronomyPictureOfTheDay.getUrl());
-        return message;
-    }
 
-    private String sendAstronomyPictureOfTheDifferentDay(String date){
-        AstronomyPictureOfTheDay astronomyPictureOfTheDay = nasaClient.getAstronomyPictureOfTheDifferentDay(date);
-        String message = String.format("%s\n\n" +
-                "%s\n%s\n", astronomyPictureOfTheDay.getTitle(), astronomyPictureOfTheDay.getExplanation(), astronomyPictureOfTheDay.getUrl());
-        return message;
-    }
-
-    //TODO Добавить методы для обработки некорректных сообщений (не верная дата, не верный формат даты, на текущую дату нет фото)
 
 }

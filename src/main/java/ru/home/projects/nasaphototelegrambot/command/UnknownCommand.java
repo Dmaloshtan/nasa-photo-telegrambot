@@ -14,7 +14,7 @@ public class UnknownCommand implements Command{
     }
 
     public final static String UNKNOWN_MESSAGE = "Не понимаю вас," +
-            " напишите /help чтобы узнать какие команды я поддерживаю";
+            " Чтобы посмотреть список команд щёлкни на панель клавиатуры";
 
     @Override
     public void execute(Update update) {

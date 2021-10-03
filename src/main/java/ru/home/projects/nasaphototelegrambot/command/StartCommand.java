@@ -44,21 +44,26 @@ public class StartCommand implements Command {
                 }
         );
 
+        ReplyKeyboardMarkup keyboardMarkup = getReplyKeyboardMarkup();
+        messageService.sendMessage(update.getMessage().getChatId().toString(), START_MESSAGE, keyboardMarkup);
+    }
+
+    private ReplyKeyboardMarkup getReplyKeyboardMarkup() {
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
         List<KeyboardRow> keyboard = new ArrayList<>();
         KeyboardRow row = new KeyboardRow();
-        row.add("Получить фото дня");
+        row.add("photo");
         keyboard.add(row);
         row = new KeyboardRow();
-        row.add("Получить фото c марсохода");
+        row.add("mars");
         keyboard.add(row);
         row = new KeyboardRow();
-        row.add("Информация о подписке на рассылку");
+        row.add("subscribe");
         keyboard.add(row);
         row = new KeyboardRow();
-        row.add("Помощь");
+        row.add("help");
         keyboard.add(row);
         keyboardMarkup.setKeyboard(keyboard);
-        messageService.sendMessage(update.getMessage().getChatId().toString(), START_MESSAGE, keyboardMarkup);
+        return keyboardMarkup;
     }
 }
