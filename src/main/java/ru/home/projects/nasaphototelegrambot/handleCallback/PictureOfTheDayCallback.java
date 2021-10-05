@@ -37,12 +37,7 @@ public class PictureOfTheDayCallback implements ResponseCallbackQuery {
         return message;
     }
 
-    private String sendAstronomyPictureOfTheDifferentDay(String date) {
-        AstronomyPictureOfTheDay astronomyPictureOfTheDay = nasaClient.getAstronomyPictureOfTheDifferentDay(date);
-        String message = String.format("%s\n\n" +
-                "%s\n%s\n", astronomyPictureOfTheDay.getTitle(), astronomyPictureOfTheDay.getExplanation(), astronomyPictureOfTheDay.getUrl());
-        return message;
-    }
+
 
     //TODO Добавить методы для обработки некорректных сообщений (не верная дата, не верный формат даты, на текущую дату нет фото)
 

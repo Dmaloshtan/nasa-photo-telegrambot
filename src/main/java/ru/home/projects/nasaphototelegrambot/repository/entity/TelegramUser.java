@@ -16,6 +16,12 @@ public class TelegramUser {
     @Column(name = "active")
     private boolean active;
 
+    @Column(name = "bot_state")
+    private String botState;
+
+    @Column(name = "subscribe")
+    private boolean subscribe;
+
     public String getChatId() {
         return chatId;
     }
@@ -30,5 +36,21 @@ public class TelegramUser {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getBotState() {
+        return botState;
+    }
+
+    public void setBotState(String botState) {
+        this.botState = botState;
+    }
+
+    public boolean isSubscribe() {
+        return subscribe;
+    }
+
+    public void setSubscribe(boolean subscribe) {
+        this.subscribe = subscribe;
     }
 }

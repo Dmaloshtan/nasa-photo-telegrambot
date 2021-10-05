@@ -38,7 +38,8 @@ public class AstronomyPictureOfTheDayCommand implements Command{
                                 .build())
                 );
         inlineKeyboardMarkup.setKeyboard(keyboard);
-        messageService.sendMessage(update.getMessage().getChatId().toString(), "Выберите дату, на которую хотите получить фото", inlineKeyboardMarkup);
+        messageService.sendMessage(update.getMessage().getChatId().toString(), "Выберите \"Фото сегодняшнего дня\" чтобы получить актуальное на сегодня фото" +
+                "или \"выбрать дату\" для указания точной даты", inlineKeyboardMarkup);
 
     }
 

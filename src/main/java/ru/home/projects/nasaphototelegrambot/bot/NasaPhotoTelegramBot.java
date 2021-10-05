@@ -12,9 +12,14 @@ import ru.home.projects.nasaphototelegrambot.command.CommandContainer;
 import ru.home.projects.nasaphototelegrambot.command.CommandName;
 import ru.home.projects.nasaphototelegrambot.handleCallback.CallBackContainer;
 import ru.home.projects.nasaphototelegrambot.handleCallback.PictureOfTheDayCallback;
+import ru.home.projects.nasaphototelegrambot.handleMessage.AstronomyPictureOfTheDifferentDay;
+import ru.home.projects.nasaphototelegrambot.handleMessage.MessageContainer;
 import ru.home.projects.nasaphototelegrambot.nasaClient.NasaClientImpl;
+import ru.home.projects.nasaphototelegrambot.repository.entity.TelegramUser;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageServiceImpl;
 import ru.home.projects.nasaphototelegrambot.service.TelegramUserService;
+
+import java.util.Optional;
 
 @Component
 public class NasaPhotoTelegramBot extends TelegramLongPollingBot {
@@ -39,11 +44,15 @@ public class NasaPhotoTelegramBot extends TelegramLongPollingBot {
 
     private final CommandContainer commandContainer;
     private final CallBackContainer callBackContainer;
+    private final MessageContainer messageContainer;
+    private final TelegramUserService telegramUserService;
 
     @Autowired
     public NasaPhotoTelegramBot(TelegramUserService telegramUserService, NasaClientImpl nasaClient) {
         commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this), telegramUserService);
         callBackContainer = new CallBackContainer(new SendBotMessageServiceImpl(this), telegramUserService, nasaClient);
+        messageContainer = new MessageContainer(new SendBotMessageServiceImpl(this),telegramUserService,nasaClient);
+        this.telegramUserService = telegramUserService;
     }
 
     @Override
@@ -55,9 +64,15 @@ public class NasaPhotoTelegramBot extends TelegramLongPollingBot {
         }
 
         if (update.hasMessage() && update.getMessage().hasText()) {
-            String message = setPrefixToMessage(update);
 
-            if (message.startsWith(COMMAND_PREFIX)) {
+            String message = setPrefixToMessage(update);
+           TelegramUser telegramUser = telegramUserService.findByChatId(update.getMessage().getChatId().toString()).get();
+
+           if(telegramUser.getBotState().equals(BotState.SET_DATE.getBotState())){
+               System.out.println("зашёл");
+               messageContainer.retrieveCommand("date").execute(update);
+
+           } else if (message.startsWith(COMMAND_PREFIX)) {
                 commandContainer.retrieveCommand(message).execute(update);
             } else {
                 commandContainer.retrieveCommand(CommandName.NO.getCommandName()).execute(update);

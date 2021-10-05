@@ -13,6 +13,7 @@ public class CallBackContainer {
     public CallBackContainer(SendBotMessageService messageService, TelegramUserService userService, NasaClientImpl nasaClient) {
         callbackMap = ImmutableMap.<String, ResponseCallbackQuery>builder().
                 put(CallbackName.APODTODAY.getCallbackName(), new PictureOfTheDayCallback(messageService, nasaClient))
+                .put(CallbackName.APODDIF.getCallbackName(), new PictureOfTheDayDifferentCallback(messageService, userService))
                 .build();
 
     }
