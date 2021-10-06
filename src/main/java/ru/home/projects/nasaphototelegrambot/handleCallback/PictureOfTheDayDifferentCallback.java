@@ -18,7 +18,7 @@ public class PictureOfTheDayDifferentCallback implements ResponseCallbackQuery {
     private final TelegramUserService userService;
 
     public final static String SET_DATE_MESSAGE = "Введите дату, на которую хотите получить фото," +
-            "в формате YYYY-MM-DD.\n" +
+            "\nв формате <b>YYYY-MM-DD</b>\n" +
             "Например: 2020-08-26";
 
     public PictureOfTheDayDifferentCallback(SendBotMessageService messageService, TelegramUserService userService) {

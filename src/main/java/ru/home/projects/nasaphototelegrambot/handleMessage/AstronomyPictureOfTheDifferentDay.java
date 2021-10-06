@@ -1,6 +1,7 @@
 package ru.home.projects.nasaphototelegrambot.handleMessage;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.home.projects.nasaphototelegrambot.bot.BotState;
@@ -29,13 +30,21 @@ public class AstronomyPictureOfTheDifferentDay implements ResponseMessage {
         String chatId = update.getMessage().getChatId().toString();
         String date = update.getMessage().getText();
 
-        userService.findByChatId(chatId).ifPresent(
-                user -> {
-                    user.setBotState(BotState.DEFAULT.getBotState());
-                    userService.save(user);
-                });
+        try{
+            String photo = sendAstronomyPictureOfTheDifferentDay(date);
+            messageService.sendMessage(update.getMessage().getChatId().toString(), photo);
 
-        messageService.sendMessage(update.getMessage().getChatId().toString(), sendAstronomyPictureOfTheDifferentDay(date));
+            userService.findByChatId(chatId).ifPresent(
+                    user -> {
+                        user.setBotState(BotState.DEFAULT.getBotState());
+                        userService.save(user);
+                    });
+        } catch (HttpClientErrorException ex){
+            messageService.sendMessage(update.getMessage().getChatId().toString(), "Не верный формат даты");
+            System.out.println(ex.toString());
+        }
+
+
     }
 
     private String sendAstronomyPictureOfTheDifferentDay(String date) {
