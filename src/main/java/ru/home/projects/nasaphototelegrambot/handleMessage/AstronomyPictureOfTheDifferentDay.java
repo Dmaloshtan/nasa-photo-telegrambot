@@ -1,12 +1,15 @@
 package ru.home.projects.nasaphototelegrambot.handleMessage;
 
+import com.google.gson.Gson;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
 import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.home.projects.nasaphototelegrambot.bot.BotState;
 import ru.home.projects.nasaphototelegrambot.nasaClient.NasaClient;
 import ru.home.projects.nasaphototelegrambot.nasaClient.dto.AstronomyPictureOfTheDay;
+import ru.home.projects.nasaphototelegrambot.nasaClient.dto.ExceptionNasaServer;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
 import ru.home.projects.nasaphototelegrambot.service.TelegramUserService;
 
@@ -30,7 +33,7 @@ public class AstronomyPictureOfTheDifferentDay implements ResponseMessage {
         String chatId = update.getMessage().getChatId().toString();
         String date = update.getMessage().getText();
 
-        try{
+        try {
             String photo = sendAstronomyPictureOfTheDifferentDay(date);
             messageService.sendMessage(update.getMessage().getChatId().toString(), photo);
 
@@ -39,9 +42,12 @@ public class AstronomyPictureOfTheDifferentDay implements ResponseMessage {
                         user.setBotState(BotState.DEFAULT.getBotState());
                         userService.save(user);
                     });
-        } catch (HttpClientErrorException ex){
-            messageService.sendMessage(update.getMessage().getChatId().toString(), "Не верный формат даты");
-            System.out.println(ex.toString());
+        } catch (HttpClientErrorException ex) {
+            Gson gson = new Gson();
+            ExceptionNasaServer exceptionNasaServer = gson.fromJson(ex.getResponseBodyAsString(), ExceptionNasaServer.class);
+            messageService.sendMessage(update.getMessage().getChatId().toString(), "Вы ввели не верный формат даты или такой даты не существует, ответ сервера:\n" +
+                    "<b>" + exceptionNasaServer.getMsg()+ "</b>");
+
         }
 
 

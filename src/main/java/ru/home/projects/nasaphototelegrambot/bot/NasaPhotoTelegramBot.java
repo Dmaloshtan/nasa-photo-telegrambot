@@ -60,7 +60,6 @@ public class NasaPhotoTelegramBot extends TelegramLongPollingBot {
             String message = setPrefixToMessage(update);
             TelegramUser telegramUser = telegramUserService.findByChatId(update.getMessage().getChatId().toString()).get();
 
-            System.out.println(message);
 
             if (message.startsWith(COMMAND_PREFIX)) {
                 commandContainer.retrieveCommand(message).execute(update);
