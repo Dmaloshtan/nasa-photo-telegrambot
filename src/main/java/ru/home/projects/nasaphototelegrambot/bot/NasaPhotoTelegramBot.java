@@ -57,14 +57,19 @@ public class NasaPhotoTelegramBot extends TelegramLongPollingBot {
         if (update.hasMessage() && update.getMessage().hasText()) {
 
             String message = setPrefixToMessage(update);
+
+            if(message.equals("/start")){
+                commandContainer.retrieveCommand(message).execute(update);
+            }
+
             TelegramUser telegramUser = telegramUserService.findByChatId(update.getMessage().getChatId().toString()).get();
 
-            if (message.startsWith(COMMAND_PREFIX)) {
+            if (message.startsWith(COMMAND_PREFIX) && !message.equals("/start")) {
                 commandContainer.retrieveCommand(message).execute(update);
                 telegramUser.setBotState("default");
             } else if (telegramUser.getBotState().equals(BotState.SET_DATE.getBotState())) {
                 messageContainer.retrieveCommand("date").execute(update);
-            } else {
+            } else if(!message.equals("/start")){
                 commandContainer.retrieveCommand(CommandName.NO.getCommandName()).execute(update);
             }
         }
