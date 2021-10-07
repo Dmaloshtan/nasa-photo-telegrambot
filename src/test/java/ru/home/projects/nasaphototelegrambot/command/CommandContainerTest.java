@@ -21,7 +21,7 @@ class CommandContainerTest {
         SendBotMessageService messageService = Mockito.mock(SendBotMessageService.class);
         TelegramUserService telegramUserService = Mockito.mock(TelegramUserService.class);
         NasaClientImpl nasaClient = Mockito.mock(NasaClientImpl.class);
-        commandContainer = new CommandContainer(messageService, telegramUserService, nasaClient);
+        commandContainer = new CommandContainer(messageService, telegramUserService);
     }
 
     @Test

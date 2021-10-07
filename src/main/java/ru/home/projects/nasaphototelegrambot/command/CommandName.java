@@ -7,7 +7,10 @@ public enum CommandName {
     HELP("/help"),
     NO("nocommand"),
     STAT("/stat"),
-    APOD("/apod");
+    APOD("/photo"),
+    MARS("/mars"),
+    SUBSCRIBE("/subscribe");
+
 
     private final String commandName;
 

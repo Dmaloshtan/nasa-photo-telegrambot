@@ -10,7 +10,7 @@ import ru.home.projects.nasaphototelegrambot.repository.entity.TelegramUser;
 import java.util.List;
 
 @Service
-public class SendPhotoOfTheDayImpl implements SendPhotoOfTheDayService{
+public class SendPhotoOfTheDayImpl implements SendPhotoOfTheDayService {
 
     private final NasaClient nasaClient;
     private final SendBotMessageService sendPhoto;
@@ -28,9 +28,9 @@ public class SendPhotoOfTheDayImpl implements SendPhotoOfTheDayService{
         AstronomyPictureOfTheDay astronomyPictureOfTheDay = nasaClient.getAstronomyPictureOfTheDay();
         String message = String.format("Рассылка фото дня\n %s\n\n" +
                 "%s\n%s\n", astronomyPictureOfTheDay.getTitle(), astronomyPictureOfTheDay.getExplanation(), astronomyPictureOfTheDay.getUrl());
-        List<TelegramUser> users = userRepository.findAllByActiveTrue();
+        List<TelegramUser> users = userRepository.findAllBySubscribeTrue();
 
-        for(TelegramUser user : users){
+        for (TelegramUser user : users) {
             sendPhoto.sendMessage(user.getChatId(), message);
         }
 

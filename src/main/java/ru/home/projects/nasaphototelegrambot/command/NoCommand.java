@@ -12,8 +12,8 @@ public class NoCommand implements Command{
         this.messageService = messageService;
     }
 
-    public final static String NO_MESSAGE = "Я поддерживаю команды, начинающиеся со слеша(/)." +
-            "Чтобы посмотреть список команд введите /help";
+    public final static String NO_MESSAGE = "Я не поддерживаю данную команду." +
+            "Чтобы посмотреть список команд щёлкни на панель клавиатуры";
 
     @Override
     public void execute(Update update) {
