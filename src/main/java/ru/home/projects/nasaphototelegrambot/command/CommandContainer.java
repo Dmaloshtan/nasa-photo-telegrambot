@@ -18,7 +18,9 @@ public class CommandContainer {
                 put(CommandName.HELP.getCommandName(), new HelpCommand(messageService)).
                 put(CommandName.NO.getCommandName(), new NoCommand(messageService)).
                 put(CommandName.STAT.getCommandName(), new StatCommand(messageService, userService)).
-                put(CommandName.APOD.getCommandName(), new AstronomyPictureOfTheDayCommand(messageService))
+                put(CommandName.APOD.getCommandName(), new AstronomyPictureOfTheDayCommand(messageService)).
+                put(CommandName.SUBSCRIBE.getCommandName(), new SubscribeCommand(messageService)).
+                put(CommandName.MARS.getCommandName(), new MarsCommand(messageService))
                 .build();
 
         unknownCommand = new UnknownCommand(messageService);

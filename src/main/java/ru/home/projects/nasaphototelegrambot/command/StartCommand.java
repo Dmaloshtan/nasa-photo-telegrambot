@@ -19,9 +19,9 @@ public class StartCommand implements Command {
 
     private final TelegramUserService telegramUserService;
 
-    public final static String START_MESSAGE = "Привет. Я NasaPhoto Telegram Bot. " +
-            "Я могу присылать фотографии космоса с сайта Nasa\n" +
-            "Чтобы воспользоваться моим функционалом, нажмите нужную кнопку на появившейся клавиатуре.\n" +
+    public final static String START_MESSAGE = "Привет. Я NasaPhoto Telegram Bot \uD83D\uDEF0\n" +
+            "Я могу присылать фотографии космоса с сайта Nasa\uD83C\uDF0E\n" +
+            "Чтобы воспользоваться моим функционалом, нажми нужную кнопку на появившейся клавиатуре.\n" +
             "Если хочешь узнать подробнее о каждой кнопке, то нажми <b>help</b>";
 
     public StartCommand(SendBotMessageService messageService, TelegramUserService telegramUserService) {

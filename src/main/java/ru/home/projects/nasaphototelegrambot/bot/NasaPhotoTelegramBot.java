@@ -51,7 +51,6 @@ public class NasaPhotoTelegramBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
 
         if (update.hasCallbackQuery()) {
-            System.out.println(update.getCallbackQuery().getData());
             callBackContainer.retrieveCommand(update.getCallbackQuery().getData()).execute(update);
         }
 
@@ -59,7 +58,6 @@ public class NasaPhotoTelegramBot extends TelegramLongPollingBot {
 
             String message = setPrefixToMessage(update);
             TelegramUser telegramUser = telegramUserService.findByChatId(update.getMessage().getChatId().toString()).get();
-
 
             if (message.startsWith(COMMAND_PREFIX)) {
                 commandContainer.retrieveCommand(message).execute(update);
@@ -77,7 +75,6 @@ public class NasaPhotoTelegramBot extends TelegramLongPollingBot {
 
         if (!message.startsWith("/")) {
             for(CommandName name: CommandName.values()){
-                System.out.println(name.getCommandName().substring(1));
                 if(name.getCommandName().substring(1).equals(message)){
                     message = "/" + message;
                 }

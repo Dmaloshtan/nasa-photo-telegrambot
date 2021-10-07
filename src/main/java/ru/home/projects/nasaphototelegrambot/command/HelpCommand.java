@@ -12,16 +12,14 @@ public class HelpCommand implements Command {
         this.messageService = messageService;
     }
 
-    public final static String HELP_MESSAGE = String.format("✨<b>Доступные команды</b>✨\n\n"
-                    + "<b>Начать\\закончить работу с ботом</b>\n"
-                    + "%s - начать работу со мной\n"
-                    + "%s - приостановить работу со мной\n\n"
-                    + "%s - получить помощь в работе со мной\n\n"
-                    + "<b>Получить фото</b>\n"
-                    + "%s - Получить фото сегодняшнего дня\n"
-                    + "%s + Дата в формате \"YYYY-MM-DD\", например \"/apod 2020-11-25\"  - Получить фото дня на выбранную дату\n",
-            CommandName.START.getCommandName(), CommandName.STOP.getCommandName(), CommandName.HELP.getCommandName(),
-            CommandName.APOD.getCommandName(), CommandName.APOD.getCommandName());
+    public final static String HELP_MESSAGE = String.format("\uD83E\uDE90<b>Доступные команды</b>\uD83E\uDE90\n\n"
+                    + "%s - получить фото дня, публикуемые Nasa\n"
+                    + "%s - получить фото с марсохода (‼️Данный раздел находится в разработке ‼️)\n"
+                    + "%s - подписаться/отписаться на ежедневную рассылку \"фото дня\" в 14:00 по мск\n"
+                    + "%s - Помощь по командам и кнопкам\n\n",
+            CommandName.APOD.getCommandName(), CommandName.MARS.getCommandName(),
+            CommandName.SUBSCRIBE.getCommandName(), CommandName.HELP.getCommandName()
+    );
 
     @Override
     public void execute(Update update) {

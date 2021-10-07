@@ -22,6 +22,9 @@ public class AstronomyPictureOfTheDayCommand implements Command{
         this.messageService = messageService;
     }
 
+    public final static String PHOTO_MESSAGE = "Выберите \"<b>Фото сегодняшнего дня</b>\" чтобы получить актуальное на сегодня фото" +
+            " или \"<b>выбрать дату</b>\" для указания точной даты";
+
     @Override
     public void execute(Update update) {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
@@ -38,8 +41,7 @@ public class AstronomyPictureOfTheDayCommand implements Command{
                                 .build())
                 );
         inlineKeyboardMarkup.setKeyboard(keyboard);
-        messageService.sendMessage(update.getMessage().getChatId().toString(), "Выберите \"<b>Фото сегодняшнего дня</b>\" чтобы получить актуальное на сегодня фото" +
-                " или \"<b>выбрать дату</b>\" для указания точной даты", inlineKeyboardMarkup);
+        messageService.sendMessage(update.getMessage().getChatId().toString(), PHOTO_MESSAGE, inlineKeyboardMarkup);
 
     }
 

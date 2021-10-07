@@ -23,7 +23,7 @@ public class StopCommand implements Command{
         messageService.sendMessage(update.getMessage().getChatId().toString(), STOP_MESSAGE);
         telegramUserService.findByChatId(update.getMessage().getChatId().toString())
                 .ifPresent(it -> {
-                    it.setActive(false);
+                    it.setSubscribe(false);
                     telegramUserService.save(it);
                 });
     }
