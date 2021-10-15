@@ -1,14 +1,13 @@
 version: '3.1'
 
 services:
-  nptb-db:
-    image: mysql:5.7
+  jrtb-db-dev:
+    image: mysql
     restart: always
-    env_file:
-      - C:\Users\Дмитрий\IdeaProjects\nasa-photo-telegrambot\nasatb-db-dev.env
+    container_name: dev-jrtb-db
     ports:
-      # <Port exposed> : < MySQL Port running inside container>
       - '3307:3306'
     expose:
-      # Opens port 3307 on the container
       - '3307'
+    env_file:
+      - ./jrtb-db-dev.env

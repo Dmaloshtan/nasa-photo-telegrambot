@@ -1,18 +1,22 @@
 version: '3.1'
 
 services:
-  nptb:
-    depends_on:
-      - nptb-db
+  jrtb-bot:
+    container_name: jrtb-bot
     build:
       context: .
     env_file:
-     - nasatb-db-prod.env
+      - jrtb-bot.env
+    depends_on:
+      - jrtb-db
     restart: always
-  nptb-db:
-    image: postgres
-    restart: always
+  jrtb-db:
+    container_name: jrtb-db
+    image: mysql:latest
     env_file:
-      - nasatb-db-prod.env
+      - jrtb-db-prod.env
     ports:
-      - '5433:5433'
+      - '3307:3306'
+    expose:
+      - '3307'
+    restart: always

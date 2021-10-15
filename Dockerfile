@@ -4,5 +4,5 @@ ARG JAR_FILE=target/*.jar
 
 COPY ${JAR_FILE} app.jar
 
-ENTRYPOINT ["java","-Dspring.datasource.password=${JDBC_DATABASE_PASSWORD}", "-Dspring.datasource.username=${JDBC_DATABASE_USERNAME}", "-Dusername=$BOT_USERNAME","-Dtoken=$BOT_TOKEN", "-Dapi_key=$NASA_API_KEY","-jar","/app.jar"]
+ENTRYPOINT ["java","-Dusername=$BOT_USERNAME","-Dtoken=$BOT_TOKEN","-Dspring.datasource.password=${BOT_DB_PASSWORD}","-Dspring.datasource.username=${BOT_DB_USERNAME}", "-Dapi_key=$NASA_API_KEY", "-jar","/app.jar"]
 
