@@ -17,7 +17,8 @@ Bot is deployed to Heroku and available in telegram --> [**NasaPhoto Telegram Bo
 
 </div>
 
-##💻 Deployment
+# 💻 Deployment  
+
 Deployment process as easy as possible:
 Required software:
 - terminal for running bash scripts
@@ -43,14 +44,13 @@ Required software:
    - JDBC_DATABASE_PASSWORD=<db user password>
    - MYSQL_ROOT_PASSWORD=<root password>
 
-
 to deploy application, switch to needed branch and run bash script:
 
 $ `bash start.sh`
 
 That's all.
 
-# Local development
+# 🖱️ Local development
 For local development and testing, use `docker-compose-test.yml`.
 Run command:
 ```shell
@@ -81,7 +81,7 @@ And add VM Options:
 
 With these configurations - run SpringBoot main method.
 
-#🧰 Technological stack 
+# 🧰 Technological stack 
 - SpringBoot as a skeleton framework
 - Spring Scheduler as a task manager
 - MySQL database as a database for saving user and subscription info
