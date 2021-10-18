@@ -19,37 +19,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 @DisplayName("Unit-level testing for StartCommand")
-public class StartCommandTest{
-
-    protected NasaPhotoTelegramBot telegramBot = Mockito.mock(NasaPhotoTelegramBot.class);
-    protected SendBotMessageService messageService = new SendBotMessageServiceImpl(telegramBot);
-    protected TelegramUserService telegramUserService = Mockito.mock(TelegramUserService.class);
+public class StartCommandTest extends AbstractCommandTest{
 
 
-
-    @Test
-    public void shouldProperlyExecuteCommand() throws TelegramApiException {
-
-        Long chatId = 1234567824356L;
-        Update update = new Update();
-        Message message = Mockito.mock(Message.class);
-        Mockito.when(message.getChatId()).thenReturn(chatId);
-        Mockito.when(message.getText()).thenReturn(CommandName.START.getCommandName());
-        Mockito.when(message.getText()).thenReturn(CommandName.START.getCommandName());
-        update.setMessage(message);
-
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(chatId.toString());
-        sendMessage.setText(StartCommand.START_MESSAGE);
-        sendMessage.setReplyMarkup(getReplyKeyboardMarkup());
-        sendMessage.enableHtml(true);
-
-        new StartCommand(messageService, telegramUserService).execute(update);
-
-        Mockito.verify(telegramBot).execute(sendMessage);
+    @Override
+    String getCommandName() {
+        return CommandName.START.getCommandName();
     }
 
-    private ReplyKeyboardMarkup getReplyKeyboardMarkup() {
+    @Override
+    String getCommandMessage() {
+        return StartCommand.START_MESSAGE;
+    }
+
+    @Override
+    Command getCommand() {
+        return new StartCommand(messageService, telegramUserService);
+    }
+
+    @Override
+    ReplyKeyboardMarkup getReplyKeyboardMarkUp() {
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
         List<KeyboardRow> keyboard = new ArrayList<>();
         KeyboardRow row = new KeyboardRow();

@@ -25,6 +25,7 @@ public abstract class AbstractCommandTest {
     abstract String getCommandName();
     abstract String getCommandMessage();
     abstract Command getCommand();
+    abstract ReplyKeyboardMarkup getReplyKeyboardMarkUp();
 
     @Test
     public void shouldProperlyExecuteCommand() throws TelegramApiException {
@@ -40,29 +41,11 @@ public abstract class AbstractCommandTest {
         sendMessage.setChatId(chatId.toString());
         sendMessage.setText(getCommandMessage());
         sendMessage.enableHtml(true);
+        sendMessage.setReplyMarkup(getReplyKeyboardMarkUp());
 
         getCommand().execute(update);
 
         Mockito.verify(telegramBot).execute(sendMessage);
-    }
-
-    private ReplyKeyboardMarkup getReplyKeyboardMarkup() {
-        ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
-        List<KeyboardRow> keyboard = new ArrayList<>();
-        KeyboardRow row = new KeyboardRow();
-        row.add("photo");
-        keyboard.add(row);
-        row = new KeyboardRow();
-        row.add("mars");
-        keyboard.add(row);
-        row = new KeyboardRow();
-        row.add("subscribe");
-        keyboard.add(row);
-        row = new KeyboardRow();
-        row.add("help");
-        keyboard.add(row);
-        keyboardMarkup.setKeyboard(keyboard);
-        return keyboardMarkup;
     }
 
 }

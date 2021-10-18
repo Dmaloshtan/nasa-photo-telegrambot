@@ -1,6 +1,7 @@
 package ru.home.projects.nasaphototelegrambot.command;
 
 import org.junit.jupiter.api.DisplayName;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 
 @DisplayName("Unit-level testing for StopCommand")
 public class StopCommandTest extends AbstractCommandTest{
@@ -19,5 +20,10 @@ public class StopCommandTest extends AbstractCommandTest{
     @Override
     Command getCommand() {
         return new StopCommand(messageService, telegramUserService);
+    }
+
+    @Override
+    ReplyKeyboardMarkup getReplyKeyboardMarkUp() {
+        return null;
     }
 }

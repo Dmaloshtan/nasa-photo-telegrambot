@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.home.projects.nasaphototelegrambot.bot.NasaPhotoTelegramBot;
 
@@ -35,6 +36,25 @@ class SendBotMessageServiceTest {
 
         //when
         messageService.sendMessage(chatId, message);
+
+        //then
+        Mockito.verify(telegramBot).execute(sendMessage);
+    }
+
+    @Test
+    public void shouldProperlySendMessageWithMarkup() throws TelegramApiException {
+        //given
+        String chatId = "test_chat_id";
+        String message = "test_message";
+        ReplyKeyboardMarkup keyboardMarkup = Mockito.mock(ReplyKeyboardMarkup.class);
+        SendMessage sendMessage = new SendMessage();
+        sendMessage.setText(message);
+        sendMessage.setChatId(chatId);
+        sendMessage.enableHtml(true);
+        sendMessage.setReplyMarkup(keyboardMarkup);
+
+        //when
+        messageService.sendMessage(chatId, message, keyboardMarkup);
 
         //then
         Mockito.verify(telegramBot).execute(sendMessage);
