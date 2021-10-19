@@ -38,7 +38,7 @@ public class StartCommandTest extends AbstractCommandTest{
     }
 
     @Override
-    ReplyKeyboardMarkup getReplyKeyboardMarkUp() {
+    ReplyKeyboardMarkup getReplyKeyboard() {
         ReplyKeyboardMarkup keyboardMarkup = new ReplyKeyboardMarkup();
         List<KeyboardRow> keyboard = new ArrayList<>();
         KeyboardRow row = new KeyboardRow();

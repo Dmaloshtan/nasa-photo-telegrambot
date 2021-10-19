@@ -23,7 +23,7 @@ public class NoCommandTest extends AbstractCommandTest{
     }
 
     @Override
-    ReplyKeyboardMarkup getReplyKeyboardMarkUp() {
+    ReplyKeyboardMarkup getReplyKeyboard() {
         return null;
     }
 }

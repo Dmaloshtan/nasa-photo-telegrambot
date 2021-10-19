@@ -23,7 +23,7 @@ public class HelpCommandTest extends AbstractCommandTest{
     }
 
     @Override
-    ReplyKeyboardMarkup getReplyKeyboardMarkUp() {
+    ReplyKeyboardMarkup getReplyKeyboard() {
         return null;
     }
 }
