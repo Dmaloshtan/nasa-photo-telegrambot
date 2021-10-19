@@ -1,6 +1,7 @@
 package ru.home.projects.nasaphototelegrambot.command;
 
 import org.junit.jupiter.api.DisplayName;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 
 @DisplayName("Unit-level testing for HelpCommand")
 public class HelpCommandTest extends AbstractCommandTest{
@@ -19,5 +20,10 @@ public class HelpCommandTest extends AbstractCommandTest{
     @Override
     Command getCommand() {
         return new HelpCommand(messageService);
+    }
+
+    @Override
+    ReplyKeyboardMarkup getReplyKeyboard() {
+        return null;
     }
 }

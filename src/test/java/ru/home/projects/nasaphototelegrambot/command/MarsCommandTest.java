@@ -3,23 +3,24 @@ package ru.home.projects.nasaphototelegrambot.command;
 import org.junit.jupiter.api.DisplayName;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 
-@DisplayName("Unit-level testing for StopCommand")
-public class StopCommandTest extends AbstractCommandTest{
+import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayName("Unit-level testing for MarsCommand")
+class MarsCommandTest extends AbstractCommandTest {
 
     @Override
     String getCommandName() {
-        return CommandName.STOP.getCommandName();
+        return CommandName.MARS.getCommandName();
     }
 
     @Override
     String getCommandMessage() {
-        return StopCommand.STOP_MESSAGE;
+        return MarsCommand.MARS_MESSAGE;
     }
 
     @Override
     Command getCommand() {
-        return new StopCommand(messageService, telegramUserService);
+        return new MarsCommand(messageService);
     }
 
     @Override

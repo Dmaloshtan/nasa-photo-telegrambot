@@ -39,10 +39,9 @@ public class PictureOfTheDayCallback implements ResponseCallbackQuery {
             messageService.sendMessage(update.getMessage().getChatId().toString(), "Ошибка сервера, на сайте Nasa ведутся технические работы:\n" +
                     "<b>" + exceptionNasaServer.getMsg()+ "</b>");
         }
-
     }
 
-    private String sendAstronomyPictureOfTheDay() {
+    public String sendAstronomyPictureOfTheDay() {
         AstronomyPictureOfTheDay astronomyPictureOfTheDay = nasaClient.getAstronomyPictureOfTheDay();
         return String.format("%s\n\n" +
                 "%s\n%s\n", astronomyPictureOfTheDay.getTitle(), astronomyPictureOfTheDay.getExplanation(), astronomyPictureOfTheDay.getUrl());

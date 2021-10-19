@@ -3,7 +3,6 @@ package ru.home.projects.nasaphototelegrambot.handleCallback;
 public enum CallbackName {
 
     APODTODAY("today"),
-//    SETDATE("set_date"),
     APODDIF("DatePhoto"),
     SUBSCRIBE("subscribe"),
     UNSUBSCRIBE("unsubscribe");
