@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import ru.home.projects.nasaphototelegrambot.nasaClient.NasaClientImpl;
+import static java.util.Collections.singletonList;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
 import ru.home.projects.nasaphototelegrambot.service.TelegramUserService;
 
@@ -20,7 +20,7 @@ class CommandContainerTest {
     public void init(){
         SendBotMessageService messageService = Mockito.mock(SendBotMessageService.class);
         TelegramUserService telegramUserService = Mockito.mock(TelegramUserService.class);
-        commandContainer = new CommandContainer(messageService, telegramUserService);
+        commandContainer = new CommandContainer(messageService, telegramUserService,singletonList("username"));
     }
 
     @Test
@@ -28,7 +28,7 @@ class CommandContainerTest {
         //when-then
         Arrays.stream(CommandName.values())
                 .forEach(commandName -> {
-                    Command command = commandContainer.retrieveCommand(commandName.getCommandName());
+                    Command command = commandContainer.retrieveCommand(commandName.getCommandName(), "username");
                     Assertions.assertNotEquals(UnknownCommand.class, command.getClass());
                 });
     }
@@ -37,7 +37,7 @@ class CommandContainerTest {
     public void shouldReturnUnknownCommand(){
         String unknownCommand = "qweqweqwe";
 
-        Command command = commandContainer.retrieveCommand(unknownCommand);
+        Command command = commandContainer.retrieveCommand(unknownCommand, "username");
 
         Assertions.assertEquals(UnknownCommand.class, command.getClass());
     }
