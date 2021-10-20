@@ -1,9 +1,11 @@
 package ru.home.projects.nasaphototelegrambot.command;
 
 import org.telegram.telegrambots.meta.api.objects.Update;
+import ru.home.projects.nasaphototelegrambot.command.annotation.AdminCommand;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
 import ru.home.projects.nasaphototelegrambot.service.TelegramUserService;
 
+@AdminCommand
 public class StatCommand implements Command{
 
     private final TelegramUserService telegramUserService;

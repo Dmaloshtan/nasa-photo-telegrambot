@@ -14,6 +14,8 @@ import ru.home.projects.nasaphototelegrambot.repository.entity.TelegramUser;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageServiceImpl;
 import ru.home.projects.nasaphototelegrambot.service.TelegramUserService;
 
+import java.util.List;
+
 @Component
 public class NasaPhotoTelegramBot extends TelegramLongPollingBot {
 
@@ -40,8 +42,8 @@ public class NasaPhotoTelegramBot extends TelegramLongPollingBot {
     private final TelegramUserService telegramUserService;
 
     @Autowired
-    public NasaPhotoTelegramBot(TelegramUserService telegramUserService, NasaClientImpl nasaClient) {
-        commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this), telegramUserService);
+    public NasaPhotoTelegramBot(TelegramUserService telegramUserService, NasaClientImpl nasaClient, @Value("${bot.admin}") List<String> admins) {
+        commandContainer = new CommandContainer(new SendBotMessageServiceImpl(this), telegramUserService, admins);
         callBackContainer = new CallBackContainer(new SendBotMessageServiceImpl(this), telegramUserService, nasaClient);
         messageContainer = new MessageContainer(new SendBotMessageServiceImpl(this), telegramUserService, nasaClient);
         this.telegramUserService = telegramUserService;
@@ -57,20 +59,21 @@ public class NasaPhotoTelegramBot extends TelegramLongPollingBot {
         if (update.hasMessage() && update.getMessage().hasText()) {
 
             String message = setPrefixToMessage(update);
+            String username = update.getMessage().getFrom().getUserName();
 
             if(message.equals("/start")){
-                commandContainer.retrieveCommand(message).execute(update);
+                commandContainer.retrieveCommand(message, username).execute(update);
             }
 
             TelegramUser telegramUser = telegramUserService.findByChatId(update.getMessage().getChatId().toString()).get();
 
             if (message.startsWith(COMMAND_PREFIX) && !message.equals("/start")) {
-                commandContainer.retrieveCommand(message).execute(update);
+                commandContainer.retrieveCommand(message, username).execute(update);
                 telegramUser.setBotState("default");
             } else if (telegramUser.getBotState().equals(BotState.SET_DATE.getBotState())) {
                 messageContainer.retrieveCommand("date").execute(update);
             } else if(!message.equals("/start")){
-                commandContainer.retrieveCommand(CommandName.NO.getCommandName()).execute(update);
+                commandContainer.retrieveCommand(CommandName.NO.getCommandName(), username).execute(update);
             }
         }
     }
