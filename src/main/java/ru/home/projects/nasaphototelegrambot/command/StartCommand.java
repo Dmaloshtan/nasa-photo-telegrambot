@@ -32,12 +32,12 @@ public class StartCommand implements Command {
     @Override
     public void execute(Update update) {
         String chatId = update.getMessage().getChatId().toString();
-
+        String username = update.getMessage().getFrom().getUserName();
         telegramUserService.findByChatId(chatId).ifPresentOrElse(
                 user -> {
                     user.setActive(true);
-                    user.setSubscribe(false);
                     user.setBotState(BotState.DEFAULT.getBotState());
+                    user.setUsername(username);
                     telegramUserService.save(user);
                 },
                 () -> {
@@ -46,6 +46,7 @@ public class StartCommand implements Command {
                     telegramUser.setSubscribe(false);
                     telegramUser.setBotState(BotState.DEFAULT.getBotState());
                     telegramUser.setChatId(chatId);
+                    telegramUser.setUsername(username);
                     telegramUserService.save(telegramUser);
                 }
         );
