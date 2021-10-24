@@ -1,10 +1,15 @@
 package ru.home.projects.nasaphototelegrambot.nasaClient;
 
 import ru.home.projects.nasaphototelegrambot.nasaClient.dto.AstronomyPictureOfTheDay;
+import ru.home.projects.nasaphototelegrambot.nasaClient.dto.MarsPhoto;
 
 public interface NasaClient {
 
-    public AstronomyPictureOfTheDay getAstronomyPictureOfTheDay();
+    AstronomyPictureOfTheDay getAstronomyPictureOfTheDay();
 
-    public AstronomyPictureOfTheDay getAstronomyPictureOfTheDifferentDay(String date);
+    AstronomyPictureOfTheDay getAstronomyPictureOfTheDifferentDay(String date);
+
+    MarsPhoto getMarsPhoto(String rover);
+
+
 }
