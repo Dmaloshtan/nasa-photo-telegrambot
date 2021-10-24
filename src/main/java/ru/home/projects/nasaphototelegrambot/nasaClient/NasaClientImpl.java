@@ -6,6 +6,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import ru.home.projects.nasaphototelegrambot.nasaClient.dto.AstronomyPictureOfTheDay;
 import ru.home.projects.nasaphototelegrambot.nasaClient.dto.MarsPhoto;
+import ru.home.projects.nasaphototelegrambot.nasaClient.dto.MarsRoverResponse;
 
 @Service
 public class NasaClientImpl implements NasaClient {
@@ -39,10 +40,14 @@ public class NasaClientImpl implements NasaClient {
     public MarsPhoto getMarsPhoto(String rover) {
         String finalUrl = urlMarsPhoto + rover + "/photos";
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(finalUrl)
-                .queryParam("sol", "1000")
+                .queryParam("sol", "1")
                 .queryParam("api_key", API_KEY);
+
         RestTemplate template = new RestTemplate();
-        MarsPhoto marsPhoto = template.getForObject(builder.toUriString(), MarsPhoto.class);
+        MarsRoverResponse marsPhotos = template.getForObject(builder.toUriString(), MarsRoverResponse.class);
+
+        MarsPhoto marsPhoto = marsPhotos.getMarsPhotos().get(0);
+
         return marsPhoto;
     }
 
