@@ -8,6 +8,8 @@ import ru.home.projects.nasaphototelegrambot.nasaClient.dto.AstronomyPictureOfTh
 import ru.home.projects.nasaphototelegrambot.nasaClient.dto.MarsPhoto;
 import ru.home.projects.nasaphototelegrambot.nasaClient.dto.MarsRoverResponse;
 
+import java.util.Random;
+
 @Service
 public class NasaClientImpl implements NasaClient {
 
@@ -39,16 +41,43 @@ public class NasaClientImpl implements NasaClient {
     @Override
     public MarsPhoto getMarsPhoto(String rover) {
         String finalUrl = urlMarsPhoto + rover + "/photos";
+        int sol = getRandomSol(rover);
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(finalUrl)
-                .queryParam("sol", "1")
+                .queryParam("sol", String.valueOf(sol))
                 .queryParam("api_key", API_KEY);
 
         RestTemplate template = new RestTemplate();
-        MarsRoverResponse marsPhotos = template.getForObject(builder.toUriString(), MarsRoverResponse.class);
+        MarsRoverResponse marsPhotos;
+
+        do {
+            marsPhotos = template.getForObject(builder.toUriString(), MarsRoverResponse.class);
+        } while (marsPhotos.getMarsPhotos().size() == 0);
+
 
         MarsPhoto marsPhoto = marsPhotos.getMarsPhotos().get(0);
 
         return marsPhoto;
+    }
+
+    private int getRandomSol(String rover){
+        Random random = new Random();
+        int randomSol = 1;
+
+        switch (rover){
+            case "curiosity" :
+                randomSol = random.nextInt(RoversSol.CURIOSITY_ROVER_MAX_SOL.getRoversSol()
+                        +RoversSol.CURIOSITY_ROVER_MIN_SOL.getRoversSol());
+                break;
+            case "opportunity" :
+                randomSol = random.nextInt(RoversSol.OPPORTUNITY_ROVER_MAX_SOL.getRoversSol()
+                        +RoversSol.OPPORTUNITY_ROVER_MIN_SOL.getRoversSol());
+                break;
+            case "spirit" :
+                randomSol = random.nextInt(RoversSol.SPIRIT_ROVER_MAX_SOL.getRoversSol()
+                        +RoversSol.SPIRIT_ROVER_MIN_SOL.getRoversSol());
+                break;
+        }
+        return randomSol;
     }
 
 
