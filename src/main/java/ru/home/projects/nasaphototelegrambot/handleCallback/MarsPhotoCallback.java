@@ -31,24 +31,22 @@ public class MarsPhotoCallback implements ResponseCallbackQuery {
         String rover = update.getCallbackQuery().getData();
         String callBackId = update.getCallbackQuery().getId();
         AnswerCallbackQuery answerCallbackQuery = new AnswerCallbackQuery(callBackId);
-        messageService.sendAnswerCallbackQuery(answerCallbackQuery);
         try {
             List<MarsPhoto> photos = nasaClient.getMarsPhotos(rover);
             String datePhoto = photos.get(0).getEarthDate();
             String roverName = photos.get(0).getRover().getName();
-            String message = String.format("<b>Марсоход</b> - %s\n<b>Дата съёмки</b> - %s\n", roverName, datePhoto);
+            String message = String.format("Марсоход - %s\nДата съёмки - %s\n", roverName, datePhoto);
 
             List<InputMedia> inputMedia = new ArrayList<>();
             Random random = new Random();
 
-            for(int i = 0; i < 10; i++){
+            for (int i = 0; i < 10; i++) {
                 InputMediaPhoto inputMediaPhoto = new InputMediaPhoto();
-                MarsPhoto marsPhoto = photos.get(random.nextInt(photos.size()-1));
+                MarsPhoto marsPhoto = photos.get(random.nextInt(photos.size() - 1));
                 inputMediaPhoto.setMedia(marsPhoto.getUrlPhoto());
                 inputMedia.add(inputMediaPhoto);
             }
-
-            messageService.sendMessage(chatId.toString(), message);
+            inputMedia.get(0).setCaption(message);
             messageService.sendPhotoGroup(chatId.toString(), inputMedia);
         } catch (HttpClientErrorException ex) {
             Gson gson = new Gson();
@@ -56,6 +54,7 @@ public class MarsPhotoCallback implements ResponseCallbackQuery {
             messageService.sendMessage(update.getMessage().getChatId().toString(), "Ошибка сервера, на сайте Nasa ведутся технические работы:\n" +
                     "<b>" + exceptionNasaServer.getMsg() + "</b>");
         }
+        messageService.sendAnswerCallbackQuery(answerCallbackQuery);
     }
 
 }

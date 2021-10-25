@@ -41,7 +41,9 @@ public class SendPhotoOfTheDayImpl implements SendPhotoOfTheDayService {
             Gson gson = new Gson();
             ExceptionNasaServer exceptionNasaServer = gson.fromJson(ex.getResponseBodyAsString(), ExceptionNasaServer.class);
             for (TelegramUser user : users) {
-                sendPhoto.sendMessage(user.getChatId(), "Вы ввели не верный формат даты или такой даты не существует, ответ сервера:\n" +
+                sendPhoto.sendMessage(user.getChatId(), "Прошу прощения, но на данный момент сервер Nasa не доступен," +
+                        " в связи с чем рассылка \"Фото дня\" не возможна. ☹️" +
+                        "Попробуйте позже самостоятельно запросить фотографию, через соответствующую команду бота:\n" +
                         "<b>" + exceptionNasaServer.getMsg()+ "</b>");
             }
         }

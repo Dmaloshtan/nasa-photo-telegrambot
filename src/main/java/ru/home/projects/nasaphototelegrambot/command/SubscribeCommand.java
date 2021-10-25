@@ -17,7 +17,7 @@ public class SubscribeCommand implements Command {
         this.messageService = messageService;
     }
 
-    public final static String SUBSCRIBE_MESSAGE = "Нажав кнопку \"Подписаться\" вам будет каждый день в 14:00 по мск приходить фото дня.\n" +
+    public final static String SUBSCRIBE_MESSAGE = "Нажав кнопку <b>\"Подписаться\"</b> вам будет каждый день в 14:00 по мск приходить фото дня.\n" +
                     "Кнопка \"Отменить подписку\" отменяет данную подписку";
 
     @Override

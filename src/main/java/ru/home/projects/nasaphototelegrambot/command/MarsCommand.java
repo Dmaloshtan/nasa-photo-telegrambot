@@ -17,7 +17,9 @@ public class MarsCommand implements Command {
         this.messageService = messageService;
     }
 
-    public final static String MARS_MESSAGE = "Выберите марсоход, с которого хотите получить фото";
+    public final static String MARS_MESSAGE = "Выберите марсоход, с которого хотите получить фото.\n" +
+            "Загрузка может занять <b>3-5 секунд</b>, т.к. в чат загружается сразу галерея из 10 фотографий. " +
+            "Просьба подождать.";
 
     @Override
     public void execute(Update update) {

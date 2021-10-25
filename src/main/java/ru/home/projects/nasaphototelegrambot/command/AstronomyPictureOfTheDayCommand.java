@@ -23,7 +23,7 @@ public class AstronomyPictureOfTheDayCommand implements Command{
     }
 
     public final static String PHOTO_MESSAGE = "Выберите \"<b>Фото сегодняшнего дня</b>\" чтобы получить актуальное на сегодня фото" +
-            " или \"<b>выбрать дату</b>\" для указания точной даты";
+            " или \"<b>Выбрать дату</b>\" для указания точной даты";
 
     @Override
     public void execute(Update update) {
