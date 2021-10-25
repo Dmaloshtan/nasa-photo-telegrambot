@@ -1,13 +1,18 @@
 package ru.home.projects.nasaphototelegrambot.nasaClient;
 
+import org.apache.catalina.LifecycleState;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
+import org.telegram.telegrambots.meta.api.objects.media.InputMedia;
+import org.telegram.telegrambots.meta.api.objects.media.InputMediaPhoto;
 import ru.home.projects.nasaphototelegrambot.nasaClient.dto.AstronomyPictureOfTheDay;
 import ru.home.projects.nasaphototelegrambot.nasaClient.dto.MarsPhoto;
 import ru.home.projects.nasaphototelegrambot.nasaClient.dto.MarsRoverResponse;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 @Service
@@ -39,7 +44,7 @@ public class NasaClientImpl implements NasaClient {
     }
 
     @Override
-    public MarsPhoto getMarsPhoto(String rover) {
+    public List<MarsPhoto> getMarsPhotos(String rover) {
         String finalUrl = urlMarsPhoto + rover + "/photos";
         int sol = getRandomSol(rover);
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(finalUrl)
@@ -47,16 +52,19 @@ public class NasaClientImpl implements NasaClient {
                 .queryParam("api_key", API_KEY);
 
         RestTemplate template = new RestTemplate();
-        MarsRoverResponse marsPhotos;
+        MarsRoverResponse marsRoverResponse;
 
         do {
-            marsPhotos = template.getForObject(builder.toUriString(), MarsRoverResponse.class);
-        } while (marsPhotos.getMarsPhotos().size() == 0);
+            marsRoverResponse = template.getForObject(builder.toUriString(), MarsRoverResponse.class);
+        } while (marsRoverResponse.getMarsPhotos().size() == 0);
 
+        List<MarsPhoto> marsPhotos = new ArrayList<>();
 
-        MarsPhoto marsPhoto = marsPhotos.getMarsPhotos().get(0);
+        for(MarsPhoto photo : marsRoverResponse.getMarsPhotos()){
+            marsPhotos.add(photo);
+        }
 
-        return marsPhoto;
+        return marsPhotos;
     }
 
     private int getRandomSol(String rover){
