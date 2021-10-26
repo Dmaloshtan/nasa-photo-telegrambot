@@ -98,4 +98,4 @@ ___
 
 
 [1]:https://t.me/NasaPhoto_bot
-[2]:https://media.giphy.com/media/lWJCPIRMRQLmBvyGLT/giphy.gif
+[2]:https://media.giphy.com/media/4mdZt04hGEwfaFlZI5/giphy.gif
