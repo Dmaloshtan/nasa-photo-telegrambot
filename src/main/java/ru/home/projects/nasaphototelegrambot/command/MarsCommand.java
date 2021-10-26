@@ -1,7 +1,13 @@
 package ru.home.projects.nasaphototelegrambot.command;
 
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MarsCommand implements Command {
 
@@ -11,11 +17,31 @@ public class MarsCommand implements Command {
         this.messageService = messageService;
     }
 
-    public final static String MARS_MESSAGE = "Данный раздел находится в разработке \uD83E\uDD13 и появится чуть позже." +
-            " При обновлении раздела вы получите уведомление о его запуске\uD83D\uDD14";
+    public final static String MARS_MESSAGE = "Выберите марсоход, с которого хотите получить фото.\n" +
+            "Загрузка может занять <b>3-5 секунд</b>, т.к. в чат загружается сразу галерея из 10 фотографий.";
 
     @Override
     public void execute(Update update) {
-        messageService.sendMessage(update.getMessage().getChatId().toString(), MARS_MESSAGE);
+
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(
+                Arrays.asList(
+                        InlineKeyboardButton.builder()
+                                .text("Curiosity")
+                                .callbackData("curiosity")
+                                .build(),
+                        InlineKeyboardButton.builder()
+                                .text("Opportunity")
+                                .callbackData("opportunity")
+                                .build(),
+                        InlineKeyboardButton.builder()
+                                .text("Spirit")
+                                .callbackData("spirit")
+                                .build())
+        );
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        messageService.sendMessage(update.getMessage().getChatId().toString(), MARS_MESSAGE, inlineKeyboardMarkup);
+
     }
 }

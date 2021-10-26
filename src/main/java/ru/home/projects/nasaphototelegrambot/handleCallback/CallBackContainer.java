@@ -17,6 +17,9 @@ public class CallBackContainer {
                 .put(CallbackName.APODDIF.getCallbackName(), new PictureOfTheDayDifferentCallback(messageService, userService))
                 .put(CallbackName.SUBSCRIBE.getCallbackName(), new SubscribeCallback(messageService,userService))
                 .put(CallbackName.UNSUBSCRIBE.getCallbackName(), new UnsubscribeCallback(messageService, userService))
+                .put(CallbackName.CURIOSITY_ROVER.getCallbackName(), new MarsPhotoCallback(messageService, nasaClient))
+                .put(CallbackName.OPPORTUNITY_ROVER.getCallbackName(), new MarsPhotoCallback(messageService, nasaClient))
+                .put(CallbackName.SPIRIT_ROVER.getCallbackName(), new MarsPhotoCallback(messageService, nasaClient))
                 .build();
     }
 

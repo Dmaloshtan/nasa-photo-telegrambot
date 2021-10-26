@@ -45,12 +45,12 @@ public class AstronomyPictureOfTheDifferentDay implements ResponseMessage {
         } catch (HttpClientErrorException ex) {
             Gson gson = new Gson();
             ExceptionNasaServer exceptionNasaServer = gson.fromJson(ex.getResponseBodyAsString(), ExceptionNasaServer.class);
-            messageService.sendMessage(update.getMessage().getChatId().toString(), "Вы ввели не верный формат даты или такой даты не существует, ответ сервера:\n" +
-                    "<b>" + exceptionNasaServer.getMsg()+ "</b>");
-
+            messageService.sendMessage(update.getMessage().getChatId().toString(),
+                    "Вы ввели не верный формат даты / такой даты не существует или " +
+                            "на данный момент сервер Nasa не доступен. Попробуйте ввести ещё раз\n\n" +
+                            "Ответ сервера:\n" +
+                            "<b>" + exceptionNasaServer.getMsg() + "</b>\n");
         }
-
-
     }
 
     private String sendAstronomyPictureOfTheDifferentDay(String date) {
