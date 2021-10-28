@@ -46,15 +46,15 @@ public class NasaClientImpl implements NasaClient {
     @Override
     public List<MarsPhoto> getMarsPhotos(String rover) {
         String finalUrl = urlMarsPhoto + rover + "/photos";
-        int sol = getRandomSol(rover);
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(finalUrl)
-                .queryParam("sol", String.valueOf(sol))
-                .queryParam("api_key", API_KEY);
 
         RestTemplate template = new RestTemplate();
         MarsRoverResponse marsRoverResponse;
 
         do {
+            int sol = getRandomSol(rover);
+            UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(finalUrl)
+                    .queryParam("sol", String.valueOf(sol))
+                    .queryParam("api_key", API_KEY);
             marsRoverResponse = template.getForObject(builder.toUriString(), MarsRoverResponse.class);
         } while (marsRoverResponse.getMarsPhotos().size() == 0);
 

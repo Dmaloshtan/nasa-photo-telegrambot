@@ -51,7 +51,7 @@ public class MarsPhotoCallback implements ResponseCallbackQuery {
         } catch (HttpClientErrorException ex) {
             Gson gson = new Gson();
             ExceptionNasaServer exceptionNasaServer = gson.fromJson(ex.getResponseBodyAsString(), ExceptionNasaServer.class);
-            messageService.sendMessage(update.getMessage().getChatId().toString(), "Ошибка сервера, на сайте Nasa ведутся технические работы:\n" +
+            messageService.sendMessage(update.getCallbackQuery().getMessage().getChatId().toString(), "Ошибка сервера, на сайте Nasa ведутся технические работы:\n" +
                     "<b>" + exceptionNasaServer.getMsg() + "</b>");
         }
         messageService.sendAnswerCallbackQuery(answerCallbackQuery);
