@@ -2,8 +2,6 @@ package ru.home.projects.nasaphototelegrambot.command;
 
 import com.google.common.collect.ImmutableMap;
 import ru.home.projects.nasaphototelegrambot.command.annotation.AdminCommand;
-import ru.home.projects.nasaphototelegrambot.handleCallback.PictureOfTheDayCallback;
-import ru.home.projects.nasaphototelegrambot.nasaClient.NasaClientImpl;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
 import ru.home.projects.nasaphototelegrambot.service.TelegramUserService;
 

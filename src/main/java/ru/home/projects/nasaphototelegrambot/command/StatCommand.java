@@ -9,7 +9,7 @@ import ru.home.projects.nasaphototelegrambot.service.TelegramUserService;
 import java.util.List;
 
 @AdminCommand
-public class StatCommand implements Command{
+public class StatCommand implements Command {
 
     private final TelegramUserService telegramUserService;
     private final SendBotMessageService sendBotMessageService;
@@ -28,7 +28,7 @@ public class StatCommand implements Command{
         List<TelegramUser> users = telegramUserService.retrieveAllActiveUsers();
         StringBuilder builderMessage = new StringBuilder();
 
-        for(TelegramUser user : users){
+        for (TelegramUser user : users) {
             builderMessage.append(user.getUsername()).append("           ").append(user.isSubscribe()).append("\n");
         }
 

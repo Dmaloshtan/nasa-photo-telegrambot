@@ -1,6 +1,5 @@
 package ru.home.projects.nasaphototelegrambot.command;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
@@ -33,6 +32,13 @@ public class StartCommand implements Command {
     public void execute(Update update) {
         String chatId = update.getMessage().getChatId().toString();
         String username = update.getMessage().getFrom().getUserName();
+        createUser(chatId, username);
+
+        ReplyKeyboardMarkup keyboardMarkup = getReplyKeyboardMarkup();
+        messageService.sendMessage(update.getMessage().getChatId().toString(), START_MESSAGE, keyboardMarkup);
+    }
+
+    private void createUser(String chatId, String username) {
         telegramUserService.findByChatId(chatId).ifPresentOrElse(
                 user -> {
                     user.setActive(true);
@@ -50,9 +56,6 @@ public class StartCommand implements Command {
                     telegramUserService.save(telegramUser);
                 }
         );
-
-        ReplyKeyboardMarkup keyboardMarkup = getReplyKeyboardMarkup();
-        messageService.sendMessage(update.getMessage().getChatId().toString(), START_MESSAGE, keyboardMarkup);
     }
 
     private ReplyKeyboardMarkup getReplyKeyboardMarkup() {

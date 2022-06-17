@@ -1,7 +1,14 @@
 package ru.home.projects.nasaphototelegrambot.command;
 
 import org.junit.jupiter.api.DisplayName;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,7 +31,25 @@ class MarsCommandTest extends AbstractCommandTest {
     }
 
     @Override
-    ReplyKeyboardMarkup getReplyKeyboard() {
-        return null;
+    ReplyKeyboard getReplyKeyboard() {
+        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
+        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
+        keyboard.add(
+                Arrays.asList(
+                        InlineKeyboardButton.builder()
+                                .text("Curiosity")
+                                .callbackData("curiosity")
+                                .build(),
+                        InlineKeyboardButton.builder()
+                                .text("Opportunity")
+                                .callbackData("opportunity")
+                                .build(),
+                        InlineKeyboardButton.builder()
+                                .text("Spirit")
+                                .callbackData("spirit")
+                                .build())
+        );
+        inlineKeyboardMarkup.setKeyboard(keyboard);
+        return inlineKeyboardMarkup;
     }
 }

@@ -1,6 +1,5 @@
 package ru.home.projects.nasaphototelegrambot.command;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
 

@@ -1,17 +1,13 @@
 package ru.home.projects.nasaphototelegrambot.handleCallback;
 
 import com.google.gson.Gson;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import ru.home.projects.nasaphototelegrambot.command.Command;
 import ru.home.projects.nasaphototelegrambot.nasaClient.NasaClient;
 import ru.home.projects.nasaphototelegrambot.nasaClient.dto.AstronomyPictureOfTheDay;
 import ru.home.projects.nasaphototelegrambot.nasaClient.dto.ExceptionNasaServer;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
-
 
 public class PictureOfTheDayCallback implements ResponseCallbackQuery {
 
@@ -46,6 +42,4 @@ public class PictureOfTheDayCallback implements ResponseCallbackQuery {
         return String.format("%s\n\n" +
                 "%s\n%s\n", astronomyPictureOfTheDay.getTitle(), astronomyPictureOfTheDay.getExplanation(), astronomyPictureOfTheDay.getUrl());
     }
-
-
 }

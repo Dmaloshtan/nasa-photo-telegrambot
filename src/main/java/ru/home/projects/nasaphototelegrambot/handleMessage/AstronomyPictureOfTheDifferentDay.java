@@ -13,7 +13,6 @@ import ru.home.projects.nasaphototelegrambot.nasaClient.dto.ExceptionNasaServer;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
 import ru.home.projects.nasaphototelegrambot.service.TelegramUserService;
 
-
 public class AstronomyPictureOfTheDifferentDay implements ResponseMessage {
 
     private final SendBotMessageService messageService;

@@ -56,5 +56,4 @@ public class MarsPhotoCallback implements ResponseCallbackQuery {
         }
         messageService.sendAnswerCallbackQuery(answerCallbackQuery);
     }
-
 }

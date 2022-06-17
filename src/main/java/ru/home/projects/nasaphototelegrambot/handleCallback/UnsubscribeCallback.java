@@ -5,7 +5,6 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
 import ru.home.projects.nasaphototelegrambot.service.TelegramUserService;
 
-
 public class UnsubscribeCallback implements ResponseCallbackQuery {
 
     private final SendBotMessageService messageService;
@@ -34,6 +33,4 @@ public class UnsubscribeCallback implements ResponseCallbackQuery {
         messageService.sendAnswerCallbackQuery(answerCallbackQuery);
         messageService.sendMessage(chatId, UNSUBSCRIBE_MESSAGE);
     }
-
-
 }

@@ -1,11 +1,9 @@
 package ru.home.projects.nasaphototelegrambot.command;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
 
-public class UnknownCommand implements Command{
-
+public class UnknownCommand implements Command {
 
     private final SendBotMessageService messageService;
 

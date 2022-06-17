@@ -1,11 +1,10 @@
 package ru.home.projects.nasaphototelegrambot.command;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
 import ru.home.projects.nasaphototelegrambot.service.TelegramUserService;
 
-public class StopCommand implements Command{
+public class StopCommand implements Command {
 
 
     private final SendBotMessageService messageService;
@@ -27,5 +26,4 @@ public class StopCommand implements Command{
                     telegramUserService.save(it);
                 });
     }
-
 }

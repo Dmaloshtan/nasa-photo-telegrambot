@@ -1,12 +1,9 @@
 package ru.home.projects.nasaphototelegrambot.nasaClient;
 
-import org.apache.catalina.LifecycleState;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-import org.telegram.telegrambots.meta.api.objects.media.InputMedia;
-import org.telegram.telegrambots.meta.api.objects.media.InputMediaPhoto;
 import ru.home.projects.nasaphototelegrambot.nasaClient.dto.AstronomyPictureOfTheDay;
 import ru.home.projects.nasaphototelegrambot.nasaClient.dto.MarsPhoto;
 import ru.home.projects.nasaphototelegrambot.nasaClient.dto.MarsRoverResponse;
@@ -60,33 +57,31 @@ public class NasaClientImpl implements NasaClient {
 
         List<MarsPhoto> marsPhotos = new ArrayList<>();
 
-        for(MarsPhoto photo : marsRoverResponse.getMarsPhotos()){
+        for (MarsPhoto photo : marsRoverResponse.getMarsPhotos()) {
             marsPhotos.add(photo);
         }
 
         return marsPhotos;
     }
 
-    private int getRandomSol(String rover){
+    private int getRandomSol(String rover) {
         Random random = new Random();
         int randomSol = 1;
 
-        switch (rover){
-            case "curiosity" :
+        switch (rover) {
+            case "curiosity":
                 randomSol = random.nextInt(RoversSol.CURIOSITY_ROVER_MAX_SOL.getRoversSol()
-                        +RoversSol.CURIOSITY_ROVER_MIN_SOL.getRoversSol());
+                        + RoversSol.CURIOSITY_ROVER_MIN_SOL.getRoversSol());
                 break;
-            case "opportunity" :
+            case "opportunity":
                 randomSol = random.nextInt(RoversSol.OPPORTUNITY_ROVER_MAX_SOL.getRoversSol()
-                        +RoversSol.OPPORTUNITY_ROVER_MIN_SOL.getRoversSol());
+                        + RoversSol.OPPORTUNITY_ROVER_MIN_SOL.getRoversSol());
                 break;
-            case "spirit" :
+            case "spirit":
                 randomSol = random.nextInt(RoversSol.SPIRIT_ROVER_MAX_SOL.getRoversSol()
-                        +RoversSol.SPIRIT_ROVER_MIN_SOL.getRoversSol());
+                        + RoversSol.SPIRIT_ROVER_MIN_SOL.getRoversSol());
                 break;
         }
         return randomSol;
     }
-
-
 }
