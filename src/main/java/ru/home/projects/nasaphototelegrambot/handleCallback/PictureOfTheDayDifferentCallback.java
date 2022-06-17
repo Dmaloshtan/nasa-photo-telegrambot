@@ -5,6 +5,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.home.projects.nasaphototelegrambot.bot.BotState;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
 import ru.home.projects.nasaphototelegrambot.service.TelegramUserService;
+import ru.home.projects.nasaphototelegrambot.utils.AnswerMessage;
 
 
 public class PictureOfTheDayDifferentCallback implements ResponseCallbackQuery {
@@ -12,11 +13,6 @@ public class PictureOfTheDayDifferentCallback implements ResponseCallbackQuery {
     private final SendBotMessageService messageService;
 
     private final TelegramUserService userService;
-
-    public final static String SET_DATE_MESSAGE = "Введите дату, на которую хотите получить фото," +
-            "\nв формате <b>YYYY-MM-DD</b>\n" +
-            "Например: 2020-08-26\n" +
-            "Самая ранняя возможная дата - 1995-06-16";
 
     public PictureOfTheDayDifferentCallback(SendBotMessageService messageService, TelegramUserService userService) {
         this.messageService = messageService;
@@ -36,6 +32,6 @@ public class PictureOfTheDayDifferentCallback implements ResponseCallbackQuery {
         String callBackId = update.getCallbackQuery().getId();
         AnswerCallbackQuery answerCallbackQuery = new AnswerCallbackQuery(callBackId);
         messageService.sendAnswerCallbackQuery(answerCallbackQuery);
-        messageService.sendMessage(chatId, SET_DATE_MESSAGE);
+        messageService.sendMessage(chatId, AnswerMessage.ASTRONOMY_PICTURE_OF_THE_DAY_CALLBACK);
     }
 }

@@ -4,6 +4,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
+import ru.home.projects.nasaphototelegrambot.utils.AnswerMessage;
 
 import java.util.List;
 
@@ -15,13 +16,10 @@ public class SubscribeCommand implements Command {
         this.messageService = messageService;
     }
 
-    public final static String SUBSCRIBE_MESSAGE = "Нажав кнопку <b>\"Подписаться\"</b> вам будет каждый день в 14:00 по мск приходить фото дня.\n" +
-            "Кнопка \"Отменить подписку\" отменяет данную подписку";
-
     @Override
     public void execute(Update update) {
         InlineKeyboardMarkup inlineKeyboardMarkup = getInlineKeyboardMarkup();
-        messageService.sendMessage(update.getMessage().getChatId().toString(), SUBSCRIBE_MESSAGE, inlineKeyboardMarkup);
+        messageService.sendMessage(update.getMessage().getChatId().toString(), AnswerMessage.SUBSCRIBE_COMMAND, inlineKeyboardMarkup);
     }
 
     private InlineKeyboardMarkup getInlineKeyboardMarkup() {

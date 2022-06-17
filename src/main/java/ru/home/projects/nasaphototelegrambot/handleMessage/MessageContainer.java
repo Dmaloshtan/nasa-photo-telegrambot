@@ -13,7 +13,6 @@ public class MessageContainer {
         messageMap = ImmutableMap.<String, ResponseMessage>builder().
                 put(MessageName.DATE.getCallbackName(), new AstronomyPictureOfTheDifferentDay(messageService, nasaClient, userService))
                 .build();
-
     }
 
     public ResponseMessage retrieveCommand(String messageIdentifier) {

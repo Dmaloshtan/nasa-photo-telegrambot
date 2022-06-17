@@ -4,6 +4,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
+import ru.home.projects.nasaphototelegrambot.utils.AnswerMessage;
 
 import java.util.List;
 
@@ -15,13 +16,10 @@ public class MarsCommand implements Command {
         this.messageService = messageService;
     }
 
-    public final static String MARS_MESSAGE = "Выберите марсоход, с которого хотите получить фото.\n" +
-            "Загрузка может занять <b>3-5 секунд</b>, т.к. в чат загружается сразу галерея из 10 фотографий.";
-
     @Override
     public void execute(Update update) {
         InlineKeyboardMarkup inlineKeyboardMarkup = getInlineKeyboardMarkup();
-        messageService.sendMessage(update.getMessage().getChatId().toString(), MARS_MESSAGE, inlineKeyboardMarkup);
+        messageService.sendMessage(update.getMessage().getChatId().toString(), AnswerMessage.MARS_COMMAND, inlineKeyboardMarkup);
     }
 
     private InlineKeyboardMarkup getInlineKeyboardMarkup() {

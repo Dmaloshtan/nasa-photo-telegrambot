@@ -5,6 +5,7 @@ import ru.home.projects.nasaphototelegrambot.command.annotation.AdminCommand;
 import ru.home.projects.nasaphototelegrambot.repository.entity.TelegramUser;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
 import ru.home.projects.nasaphototelegrambot.service.TelegramUserService;
+import ru.home.projects.nasaphototelegrambot.utils.AnswerMessage;
 
 import java.util.List;
 
@@ -19,9 +20,6 @@ public class StatCommand implements Command {
         this.sendBotMessageService = sendBotMessageService;
     }
 
-    public static final String STAT_MESSAGE = "NasaPhoto Telegram Bot использует %s человек:\n" +
-            "Username           Статус подписки\n";
-
     @Override
     public void execute(Update update) {
         int activeUserCount = telegramUserService.retrieveAllActiveUsers().size();
@@ -32,7 +30,7 @@ public class StatCommand implements Command {
             builderMessage.append(user.getUsername()).append("           ").append(user.isSubscribe()).append("\n");
         }
 
-        sendBotMessageService.sendMessage(update.getMessage().getChatId().toString(), String.format(STAT_MESSAGE, activeUserCount));
+        sendBotMessageService.sendMessage(update.getMessage().getChatId().toString(), String.format(AnswerMessage.STAT_COMMAND, activeUserCount));
         sendBotMessageService.sendMessage(update.getMessage().getChatId().toString(), String.format(builderMessage.toString(), activeUserCount));
     }
 }
