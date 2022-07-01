@@ -42,8 +42,8 @@ public class AnswerMessage {
                 "Я не поддерживаю данную команду." +
                         "Чтобы посмотреть список команд щёлкни на панель клавиатуры";
         STAT_COMMAND =
-                "\"NasaPhoto Telegram Bot использует %s человек:\\n\" +\n" +
-                        "            \"Username           Статус подписки\\n\"";
+                "NasaPhoto Telegram Bot использует %s человек:\n" +
+                        "Username           Статус подписки\n%s";
         START_COMMAND =
                 "\"Привет. Я NasaPhoto Telegram Bot \\uD83D\\uDEF0\\n\" +\n" +
                         "            \"Я могу присылать фотографии космоса с сайта Nasa\\uD83C\\uDF0E\\n\" +\n" +

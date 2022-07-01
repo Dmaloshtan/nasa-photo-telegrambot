@@ -22,15 +22,19 @@ public class StatCommand implements Command {
 
     @Override
     public void execute(Update update) {
-        int activeUserCount = telegramUserService.retrieveAllActiveUsers().size();
         List<TelegramUser> users = telegramUserService.retrieveAllActiveUsers();
+        int activeUserCount = users.size();
+        String userStatistics = getStatisticsMessage(users);
+
+        sendBotMessageService.sendMessage(update.getMessage().getChatId().toString(), String.format(AnswerMessage.STAT_COMMAND, activeUserCount, userStatistics));
+    }
+
+    private String getStatisticsMessage(List<TelegramUser> users) {
         StringBuilder builderMessage = new StringBuilder();
 
         for (TelegramUser user : users) {
             builderMessage.append(user.getUsername()).append("           ").append(user.isSubscribe()).append("\n");
         }
-
-        sendBotMessageService.sendMessage(update.getMessage().getChatId().toString(), String.format(AnswerMessage.STAT_COMMAND, activeUserCount));
-        sendBotMessageService.sendMessage(update.getMessage().getChatId().toString(), String.format(builderMessage.toString(), activeUserCount));
+        return builderMessage.toString();
     }
 }
