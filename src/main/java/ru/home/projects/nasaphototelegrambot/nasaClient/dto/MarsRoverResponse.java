@@ -10,7 +10,6 @@ public class MarsRoverResponse {
     @JsonProperty("photos")
     List<MarsPhoto> marsPhotos = new ArrayList<>();
 
-
     public List<MarsPhoto> getMarsPhotos() {
         return marsPhotos;
     }

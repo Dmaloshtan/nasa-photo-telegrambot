@@ -1,10 +1,7 @@
 package ru.home.projects.nasaphototelegrambot.handleMessage;
 
 import com.google.gson.Gson;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
-import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.home.projects.nasaphototelegrambot.bot.BotState;
 import ru.home.projects.nasaphototelegrambot.nasaClient.NasaClient;
@@ -12,7 +9,6 @@ import ru.home.projects.nasaphototelegrambot.nasaClient.dto.AstronomyPictureOfTh
 import ru.home.projects.nasaphototelegrambot.nasaClient.dto.ExceptionNasaServer;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
 import ru.home.projects.nasaphototelegrambot.service.TelegramUserService;
-
 
 public class AstronomyPictureOfTheDifferentDay implements ResponseMessage {
 

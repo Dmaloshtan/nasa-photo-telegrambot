@@ -1,25 +1,19 @@
 package ru.home.projects.nasaphototelegrambot.service;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
 import org.telegram.telegrambots.meta.api.methods.send.SendMediaGroup;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.media.InputMedia;
-import org.telegram.telegrambots.meta.api.objects.media.InputMediaPhoto;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.home.projects.nasaphototelegrambot.bot.NasaPhotoTelegramBot;
 
 import java.util.List;
 
 @Service
-public class SendBotMessageServiceImpl implements SendBotMessageService{
-
+public class SendBotMessageServiceImpl implements SendBotMessageService {
 
     private final NasaPhotoTelegramBot nasaBot;
 
@@ -76,5 +70,4 @@ public class SendBotMessageServiceImpl implements SendBotMessageService{
             e.printStackTrace();
         }
     }
-
 }

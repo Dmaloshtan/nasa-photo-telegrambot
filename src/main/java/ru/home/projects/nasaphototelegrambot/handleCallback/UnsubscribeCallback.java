@@ -4,15 +4,13 @@ import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
 import ru.home.projects.nasaphototelegrambot.service.TelegramUserService;
-
+import ru.home.projects.nasaphototelegrambot.utils.AnswerMessage;
 
 public class UnsubscribeCallback implements ResponseCallbackQuery {
 
     private final SendBotMessageService messageService;
 
     private final TelegramUserService userService;
-
-    public final static String UNSUBSCRIBE_MESSAGE = "Вы больше не подписаны на фото дня";
 
     public UnsubscribeCallback(SendBotMessageService messageService, TelegramUserService userService) {
         this.messageService = messageService;
@@ -32,8 +30,6 @@ public class UnsubscribeCallback implements ResponseCallbackQuery {
         String callBackId = update.getCallbackQuery().getId();
         AnswerCallbackQuery answerCallbackQuery = new AnswerCallbackQuery(callBackId);
         messageService.sendAnswerCallbackQuery(answerCallbackQuery);
-        messageService.sendMessage(chatId, UNSUBSCRIBE_MESSAGE);
+        messageService.sendMessage(chatId, AnswerMessage.UNSUBSCRIBE_CALLBACK);
     }
-
-
 }

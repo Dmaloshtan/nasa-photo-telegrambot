@@ -9,8 +9,6 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMar
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.home.projects.nasaphototelegrambot.bot.NasaPhotoTelegramBot;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @DisplayName("Unit-level testing for SendBotMessageService")
 class SendBotMessageServiceTest {
 
@@ -18,7 +16,7 @@ class SendBotMessageServiceTest {
     private NasaPhotoTelegramBot telegramBot;
 
     @BeforeEach
-    public void init(){
+    public void init() {
         telegramBot = Mockito.mock(NasaPhotoTelegramBot.class);
         messageService = new SendBotMessageServiceImpl(telegramBot);
     }

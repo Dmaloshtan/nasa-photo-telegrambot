@@ -11,7 +11,6 @@ public enum CommandName {
     MARS("/mars"),
     SUBSCRIBE("/subscribe");
 
-
     private final String commandName;
 
     CommandName(String commandName) {

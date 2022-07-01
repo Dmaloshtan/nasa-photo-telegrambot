@@ -1,6 +1,5 @@
 package ru.home.projects.nasaphototelegrambot.command;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
@@ -8,6 +7,7 @@ import ru.home.projects.nasaphototelegrambot.bot.BotState;
 import ru.home.projects.nasaphototelegrambot.repository.entity.TelegramUser;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
 import ru.home.projects.nasaphototelegrambot.service.TelegramUserService;
+import ru.home.projects.nasaphototelegrambot.utils.AnswerMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +19,6 @@ public class StartCommand implements Command {
 
     private final TelegramUserService telegramUserService;
 
-    public final static String START_MESSAGE = "Привет. Я NasaPhoto Telegram Bot \uD83D\uDEF0\n" +
-            "Я могу присылать фотографии космоса с сайта Nasa\uD83C\uDF0E\n" +
-            "Чтобы воспользоваться моим функционалом, нажми нужную кнопку на появившейся клавиатуре.\n" +
-            "Если хочешь узнать подробнее о каждой кнопке, то нажми <b>help</b>";
-
     public StartCommand(SendBotMessageService messageService, TelegramUserService telegramUserService) {
         this.messageService = messageService;
         this.telegramUserService = telegramUserService;
@@ -33,6 +28,13 @@ public class StartCommand implements Command {
     public void execute(Update update) {
         String chatId = update.getMessage().getChatId().toString();
         String username = update.getMessage().getFrom().getUserName();
+        createUser(chatId, username);
+
+        ReplyKeyboardMarkup keyboardMarkup = getReplyKeyboardMarkup();
+        messageService.sendMessage(update.getMessage().getChatId().toString(), AnswerMessage.START_COMMAND, keyboardMarkup);
+    }
+
+    private void createUser(String chatId, String username) {
         telegramUserService.findByChatId(chatId).ifPresentOrElse(
                 user -> {
                     user.setActive(true);
@@ -50,9 +52,6 @@ public class StartCommand implements Command {
                     telegramUserService.save(telegramUser);
                 }
         );
-
-        ReplyKeyboardMarkup keyboardMarkup = getReplyKeyboardMarkup();
-        messageService.sendMessage(update.getMessage().getChatId().toString(), START_MESSAGE, keyboardMarkup);
     }
 
     private ReplyKeyboardMarkup getReplyKeyboardMarkup() {

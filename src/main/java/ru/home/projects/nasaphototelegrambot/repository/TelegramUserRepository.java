@@ -12,5 +12,4 @@ public interface TelegramUserRepository extends JpaRepository<TelegramUser, Stri
     List<TelegramUser> findAllByActiveTrue();
 
     List<TelegramUser> findAllBySubscribeTrue();
-
 }

@@ -9,8 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class TelegramUserServiceImpl implements TelegramUserService{
-
+public class TelegramUserServiceImpl implements TelegramUserService {
 
     private final TelegramUserRepository repository;
 

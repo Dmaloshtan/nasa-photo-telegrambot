@@ -1,11 +1,10 @@
 package ru.home.projects.nasaphototelegrambot.command;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.home.projects.nasaphototelegrambot.service.SendBotMessageService;
+import ru.home.projects.nasaphototelegrambot.utils.AnswerMessage;
 
-public class UnknownCommand implements Command{
-
+public class UnknownCommand implements Command {
 
     private final SendBotMessageService messageService;
 
@@ -13,11 +12,8 @@ public class UnknownCommand implements Command{
         this.messageService = messageService;
     }
 
-    public final static String UNKNOWN_MESSAGE = "Не понимаю вас," +
-            " Чтобы посмотреть список команд щёлкни на панель клавиатуры";
-
     @Override
     public void execute(Update update) {
-        messageService.sendMessage(update.getMessage().getChatId().toString(), UNKNOWN_MESSAGE);
+        messageService.sendMessage(update.getMessage().getChatId().toString(), AnswerMessage.UNKNOWN_COMMAND);
     }
 }
